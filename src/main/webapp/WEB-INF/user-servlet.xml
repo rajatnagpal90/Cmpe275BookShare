@@ -51,7 +51,7 @@
 
    </bean>
    
-   
+  
      <bean id="hibernate4AnnotatedSessionFactory"  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="sjsu.com.cmpe275.entity" />
@@ -67,7 +67,15 @@
 		
 	</bean>
       
-    
+      <bean id="userDao" class="sjsu.com.cmpe275.dao.UserDaoImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
+ 
+	<bean id="myUserDetailsService" 
+                class="sjsu.com.cmpe275.service.MyUserDetailsService">
+		<property name="userDao" ref="userDao" />
+	</bean>
+          
     
     
     
