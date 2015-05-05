@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextSession;
@@ -13,12 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import sjsu.com.cmpe275.entity.Appuser;
 import sjsu.com.cmpe275.entity.Book;
+import sjsu.com.cmpe275.entity.Post;
+import sjsu.com.cmpe275.entity.User;
 
 @Repository
 @SuppressWarnings("unchecked")
 public class BookService
 {
+	
    @Autowired
    private SessionFactory mySessionFactory;
 
@@ -30,7 +35,7 @@ public class BookService
          Session session = mySessionFactory.getCurrentSession();
       
          FullTextSession fullTextSession = Search.getFullTextSession(session);
-         fullTextSession.createIndexer().startAndWait();
+         fullTextSession.createIndexer();
       }
       catch(Exception e)
       {
@@ -64,6 +69,27 @@ public class BookService
    }
    
    @Transactional
+   public void addwantPosttoDB(String ISBN, String bookDescription, String title, double price,Date dateNow)
+   {
+	   Session session = mySessionFactory.getCurrentSession();
+	      
+	      Post post = new Post();
+	 
+	      //UUID x = UUID.randomUUID();
+	      
+	      dateNow = new Date();
+	      //book.setId(x.toString());
+	      post.setISBN(ISBN);
+	      post.setDescription(bookDescription);
+	      post.setTitle(title);
+	      post.setPrice(price);
+	      post.setDate(dateNow);
+	      
+	      
+	      session.saveOrUpdate(post); 
+   }
+   
+   @Transactional
    public List<Book> searchForBook(String searchText) throws Exception
    {
       try
@@ -90,4 +116,21 @@ public class BookService
          throw e;
       }
    }
+   
+   @Transactional
+   public List<Post> listallBooks() throws Exception
+   {
+      try
+      {
+    	  Session session = mySessionFactory.getCurrentSession();
+    	  List<Post> booksPosted = session.createCriteria(Post.class).setResultTransformer
+    			  (Criteria.DISTINCT_ROOT_ENTITY).list();
+    	  return booksPosted;
+      }
+      catch(Exception e)
+      {
+         throw e;
+      }
+   }
+   
 }
