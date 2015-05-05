@@ -1,4 +1,4 @@
-# Cmpe275CharlesGang
+# Cmpe275CharlesZhang
 BookShare Project
 
 Two features have been implemented though there is testing required:
