@@ -6,7 +6,12 @@ import java.util.List;
 
 
 
-
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.resource.factory.MessageFactory;
+import com.twilio.sdk.resource.instance.Message;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +29,8 @@ import sjsu.com.cmpe275.service.BookService;
 public class BookController
 {
    private static Logger _logger = Logger.getLogger(BookController.class);
-   
+   private static String ACCOUNT_SID = "ACf73ce7345740ebac0c6fc7008bdb494c";
+   private static String AUTH_TOKEN = "abb23d41fd23fa5a5fc703fd80ae3290";
    @Autowired
    private BookService _repo;
    
@@ -133,7 +139,22 @@ public class BookController
          
          bookModels.add(bm);
       }
-      
+       System.out.println("inside sendmessage");
+        Message message = null;
+        TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+	        params.add(new BasicNameValuePair("Body", "Book Available"));
+	        params.add(new BasicNameValuePair("To", "+14086685916"));
+	        params.add(new BasicNameValuePair("From", "+12679534000"));
+	        MessageFactory messageFactory = client.getAccount().getMessageFactory();
+	        try {
+				message = messageFactory.create(params);
+				System.out.println("message sent");
+				//m.addAttribute("successmessage","Bike access code is sent to your contact details");
+			} catch (TwilioRestException e) {
+				e.printStackTrace();
+			}
+       
       ModelAndView mav = new ModelAndView("foundBooks");
       mav.addObject("foundBooks", bookModels);
       return mav;
