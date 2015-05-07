@@ -70,9 +70,9 @@ $(function() {
 					</script>
 					<div class="navig">
 						<ul>
-							<li><a href="#">Buyers</a></li>
-							<li><a href="#">Sellers</a></li>
-							<li><a href="#">Books</a></li>
+							<li><a href="buyers.html">Buyers</a></li>
+							<li><a href="sellers.html">Sellers</a></li>
+							<li><a href="books.html">Books</a></li>
 							<li><a href="feedback.html">Feedback</a></li>
 							<li><a href="about.html">About</a></li>
 						</ul>
@@ -94,10 +94,12 @@ $(function() {
 				</div>
 				<div class="clearfix"></div>
 				<div class="serch">
+								<form action="doSearch" method="post">
 								<span>
-									<input type="text" placeholder="Search" required="">
+					      			<input type="text" placeholder="Search" name="searchText" />
 									<input type="submit" value="" />
 								</span>
+							</form>
 				</div>
 				<script>
 					$( "button.search" ).click(function() {
@@ -164,5 +166,6 @@ $(function() {
 		</div>
 	</div>
 </section>
+</div>
 </body>
 </html>

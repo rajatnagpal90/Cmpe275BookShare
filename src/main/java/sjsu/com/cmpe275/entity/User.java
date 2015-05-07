@@ -16,6 +16,24 @@ public class User {
 	private String username;
 	private String password;
 	private boolean enabled;
+	private int mobileNo;
+	private String confpassword;
+	public int getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(int mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public String getConfpassword() {
+		return confpassword;
+	}
+
+	public void setConfpassword(String confpassword) {
+		this.confpassword = confpassword;
+	}
+
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
  
 	public User() {

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,7 +21,6 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 
 @Entity
-@Indexed
 @Table(name = "Postwantedbook", catalog = "bookshare")
 public class Post implements Serializable{
 	
@@ -29,35 +29,43 @@ public class Post implements Serializable{
 	 @Id
 	 @Column(name = "post_id")
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
-	 @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	 private int postId;
 	
 	 @Column(name = "title")
-	 @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	 private String title;
 	 
 	 @Column(name = "price")
-	 @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	 private double price;
 	 
 	 @Column(name = "ISBN")
-	 @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	 private String ISBN;
 
 	 @Column(name = "description")
-	 @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	 private String description;
 	 
 	 @Column(name = "author")
-	 @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
 	 private String author;
 	 
 	 @Temporal(TemporalType.TIMESTAMP)
 	 @Column(name = "date")
-	 @Field(index=Index.YES,analyze=Analyze.YES, store=Store.NO)
 	 private Date date;
 	 
-	 public int getPostId() {
+	 @ManyToOne
+	 private Seller seller;
+	 
+	 public Seller getSeller() {
+		return seller;
+	}
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public int getPostId() {
 			return postId;
 		}
 

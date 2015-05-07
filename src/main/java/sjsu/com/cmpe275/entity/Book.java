@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.Analyze;
@@ -48,8 +49,15 @@ public class Book implements Serializable {
  @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
  private String author;
  
+ @ManyToOne
+ private Seller seller;
  
- 
+public Seller getSeller() {
+	return seller;
+}
+public void setSeller(Seller seller) {
+	this.seller = seller;
+}
 /**
  * @return the iSBN
  */

@@ -69,10 +69,10 @@ $(function() {
 					</script>
 					<div class="navig">
 						<ul>
-							<li><a href="#">Buyers</a></li>
-							<li><a href="#">Sellers</a></li>
-							<li><a href="#">Books</a></li>
-							<li><a href="feedback.jsp">Feedback</a></li>
+							<li><a href="buyers.html">Buyers</a></li>
+							<li><a href="sellers.html">Sellers</a></li>
+							<li><a href="books.html">Books</a></li>
+							<li><a href="feedback.html">Feedback</a></li>
 							<li><a href="about.html">About</a></li>
 						</ul>
 					</div>
@@ -93,10 +93,12 @@ $(function() {
 				</div>
 				<div class="clearfix"></div>
 				<div class="serch">
+								<form action="doSearch" method="post">
 								<span>
-									<input type="text" placeholder="Search" required="">
+					      			<input type="text" placeholder="Search" name="searchText" />
 									<input type="submit" value="" />
 								</span>
+							</form>
 				</div>
 				<script>
 					$( "button.search" ).click(function() {
@@ -159,93 +161,9 @@ $(function() {
 				<input type="submit" value="send"/>
 			</div>
 		</div>
-		<!--<div class="look">
-						<h3>You May Also Like</h3>
-					</div>
-					<!-- Partners Starts Here --->
-					<!--<div class="partner">
-							<ul id="flexiselDemo3">
-							   <li><img src="images/ss1.jpg" class="img-responsive" alt=""/></li>
-							   <li><img src="images/ss2.jpg" class="img-responsive" alt=""/></li>
-							   <li><img src="images/ss3.jpg" class="img-responsive" alt=""/></li>
-							   <li><img src="images/ss4.jpg" class="img-responsive" alt=""/></li>
-							   <li><img src="images/ss5.png" class="img-responsive" alt=""/></li>
-							</ul>
-							<script type="text/javascript">
-								$(window).load(function() {
-									$("#flexiselDemo3").flexisel({
-										visibleItems: 5,
-										animationSpeed: 1000,
-										autoPlay: true,
-										autoPlaySpeed: 3000,    		
-										pauseOnHover: true,
-										enableResponsiveBreakpoints: true,
-								    	responsiveBreakpoints: { 
-								    		portrait: { 
-								    			changePoint:480,
-								    			visibleItems: 1
-								    		}, 
-								    		landscape: { 
-								    			changePoint:640,
-								    			visibleItems: 2
-								    		},
-								    		tablet: { 
-								    			changePoint:768,
-								    			visibleItems: 3
-								    		}
-								    	}
-								    });
-								    
-								});
-						 </script>
-				         <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-					</div>
-					<!-- Partners Ends Here --->
-					<!-- Footer Menu Starts here --->
-					<!--<div class="footer">
-						<div class="row footer-row">
-							<div class="col-md-3 footer-col">
-								<h3 class="ft-title">Collection</h3>
-								<ul class="ft-list">
-									<li><a href="#">Woman (1725)</a></li>
-									<li><a href="#">Men (635)</a></li>
-									<li><a href="#">Kids (2514</a></li>
-									<li><a href="#">Comming Soon (76)</a></li>
-								</ul>
-							</div>
-							<div class="col-md-3 footer-col">
-								<h3 class="ft-title">site</h3>
-								<ul class="ft-list  list-h">
-									<li><a href="#">Terms of Service </a></li>
-									<li><a href="#">Privacy Policy </a></li>
-									<li><a href="#">Copyright Policy </a></li>
-									<li><a href="#">Press Kit</a></li>
-									<li><a href="#">Support</a></li>
-								</ul>
-							</div>
-							<div class="col-md-3 footer-col">
-								<h3 class="ft-title">Shop</h3>
-								<ul class="ft-list list-h">
-									<li><a href="#">About us</a></li>
-									<li><a href="#">Shipping Metods</a></li>
-									<li><a href="#">Career</a></li>
-									<li><a href="contact.html">Contact</a></li>
-								</ul>
-							</div>
-							<div class="col-md-3 foot-cl">
-								<h3 class="ft-title">social</h3>
-								<p>Shoper is made with love in Warsaw,<br>2014 &copy; Template By <a href="http://w3layouts.com/">W3layouts</a></p>
-								<ul class="social">
-									<li><i class="fa"></i></li>
-									<li><i class="tw"></i></li>
-									<li><i class="is"></i></li>
-								</ul>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<!-- Footer Menu Ends here --->	
+		
 	</div>
 </section>
+</div>
 </body>
 </html>

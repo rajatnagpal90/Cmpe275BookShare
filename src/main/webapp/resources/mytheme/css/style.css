@@ -874,7 +874,7 @@ ul.tab_list li a:hover {
 	margin-top:0.5em;
 	text-align:center;
 }
-.text input[type="submit"]{
+.text input[type="submit"],.text input[type="file"]{
 	font-size:0.8em;
 	color:#fff;
 	border:0px;

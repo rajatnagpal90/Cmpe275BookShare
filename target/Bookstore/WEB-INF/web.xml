@@ -25,6 +25,13 @@
         /WEB-INF/user-servlet.xml
         </param-value>
     </context-param>
+    <context-param> 
+    <description>Location to store uploaded file</description> 
+    <param-name>file-upload</param-name> 
+    <param-value>
+         C:\Users\Ishneet\Downloads\Cmpe275BookShare-Akanksha\src\main\webapp\resources\mytheme\images\
+     </param-value> 
+</context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

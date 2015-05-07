@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -49,6 +51,72 @@ $(function() {
 });
 </script>
 </head>
+<script>
+    function initialize()
+    {
+    var x = document.getElementById("form").elements.length;
+    for(var i =0; i<x-1;i++)
+    {
+         var field = document.getElementById("form").elements[i].value ;
+         if(field == "")
+         {
+         alert("values missing");
+         return false;
+         }
+    }
+         if (document.getElementById("pwdinput"))
+         {
+         	if(document.getElementById("pwdinput").value.length<6)
+         	{
+         alert("password must be atleast 6 characters long");
+         return false;
+         	}
+        	 else if(document.getElementById("pwdinput").value != document.getElementById("cnfpwdinput").value)
+        	 {
+         alert("Passwords do not match");
+         return false;
+         	}
+         
+         }
+         
+         if(document.getElementById("mailInput").value != "")
+         {
+        var x = document.getElementById("mailInput").value;
+    	var atpos = x.indexOf("@");
+   		var dotpos = x.lastIndexOf(".");
+    	if (atpos< 1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+        alert("Not a valid e-mail address");
+        return false;
+  		  }
+         
+         }
+         if(document.getElementById("mobileInput").value != "")
+         {
+         var mobile = document.getElementById("mobileInput").value;
+          if (/^\d{10}$/.test(mobile))
+            return true;
+            else
+            {
+            alert("Enter valid moile number");
+            return false;
+            }
+         
+         }
+        if(document.getElementById("accCodeInput").value !="")
+         {
+         alert("Code must be atleast 5 characters");
+        if(document.getElementById("accCodeInput").value.length<5)
+         {
+         alert("Code must be atleast 5 characters");
+         return false;
+         }
+         } 
+     
+    	return true;
+   
+    }
+    
+    </script>
 <body>
 	<!-- Header Part Starts Here -->
 <div class="header">
@@ -69,9 +137,9 @@ $(function() {
 					</script>
 					<div class="navig">
 						<ul>
-							<li><a href="#">Buyers</a></li>
-							<li><a href="#">Sellers</a></li>
-							<li><a href="#">Books</a></li>
+							<li><a href="buyers.html">Buyers</a></li>
+							<li><a href="sellers.html">Sellers</a></li>
+							<li><a href="books.html">Books</a></li>
 							<li><a href="feedback.html">Feedback</a></li>
 							<li><a href="about.html">About</a></li>
 						</ul>
@@ -127,38 +195,39 @@ $(function() {
 			<p>Please enter your details.</p>
 		</div>
 		<div class="register">
-	  	  <form> 
+	  	  <c:if test="${found}">  <h2>Username already taken. Enter new details!</h2>  </c:if>
+	      <form:form id="form" action="registered" method="post" modelAttribute="user" onsubmit="return initialize()"> 
 			 <div class="register-top-grid">
 				<h3>PERSONAL INFORMATION</h3>
 				 <div>
-					<span>First Name<label>*</label></span>
-					<input type="text"> 
+					<span>User Name<label>*</label></span>
+					<form:input path="username" id="nameInput" />
 				 </div>
-				 <div>
+				 <!-- <div>
 					<span>Last Name<label>*</label></span>
 					<input type="text"> 
-				 </div>
+				 </div>-->
 				 <div>
-					 <span>Email Address<label>*</label></span>
-					 <input type="text"> 
+					 <span>Mobile Number<label>*</label></span>
+					 <form:input path="mobileNo" id="mobileInput" /> 
 				 </div>
 				 <div class="clearfix"> </div>
 				   <a class="news-letter" href="#">
-					 <label><i> </i>Enter a valid email id</label>
+					 <label><i> </i>Enter your mobile number for notification.</label>
 				   </a>
 				 </div>
 			     <div class="register-bottom-grid">
 					    <h3>LOGIN INFORMATION</h3>
 						 <div>
 							<span>Password<label>*</label></span>
-							<input type="password">
+							<form:input path="password" type = "password" id="pwdinput" />
 						 </div>
 						 <div>
 							<span>Confirm Password<label>*</label></span>
-							<input type="password">
+							<form:input path="confpassword" type = "password" id="cnfpwdinput" />
 						 </div>
 				 </div>
-			</form>
+			</form:form>
 			<div class="clearfix"> </div>
 			<div class="register-but">
 			   <form>
@@ -167,93 +236,8 @@ $(function() {
 			   </form>
 			</div>
 	   </div>
-	   <!--<div class="look">
-			<h3>You May Also Like</h3>
-		</div>
-		<!-- Partners Starts Here 
-		<div class="partner">
-				<ul id="flexiselDemo3">
-				   <li><img src="images/ss1.jpg" class="img-responsive" alt=""/></li>
-				   <li><img src="images/ss2.jpg" class="img-responsive" alt=""/></li>
-				   <li><img src="images/ss3.jpg" class="img-responsive" alt=""/></li>
-				   <li><img src="images/ss4.jpg" class="img-responsive" alt=""/></li>
-				   <li><img src="images/ss5.png" class="img-responsive" alt=""/></li>
-				</ul>
-				<script type="text/javascript">
-					$(window).load(function() {
-						$("#flexiselDemo3").flexisel({
-							visibleItems: 5,
-							animationSpeed: 1000,
-							autoPlay: true,
-							autoPlaySpeed: 3000,    		
-							pauseOnHover: true,
-							enableResponsiveBreakpoints: true,
-					    	responsiveBreakpoints: { 
-					    		portrait: { 
-					    			changePoint:480,
-					    			visibleItems: 1
-					    		}, 
-					    		landscape: { 
-					    			changePoint:640,
-					    			visibleItems: 2
-					    		},
-					    		tablet: { 
-					    			changePoint:768,
-					    			visibleItems: 3
-					    		}
-					    	}
-					    });
-					    
-					});
-			 </script>
-	         <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-		</div>
-		<!-- Partners Ends Here --->
-		<!-- Footer Menu Starts here --->
-		<!--<div class="footer">
-			<div class="row footer-row">
-				<div class="col-md-3 footer-col">
-					<h3 class="ft-title">Collection</h3>
-					<ul class="ft-list">
-						<li><a href="#">Woman (1725)</a></li>
-						<li><a href="#">Men (635)</a></li>
-						<li><a href="#">Kids (2514</a></li>
-						<li><a href="#">Comming Soon (76)</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 footer-col">
-					<h3 class="ft-title">site</h3>
-					<ul class="ft-list  list-h">
-						<li><a href="#">Terms of Service </a></li>
-						<li><a href="#">Privacy Policy </a></li>
-						<li><a href="#">Copyright Policy </a></li>
-						<li><a href="#">Press Kit</a></li>
-						<li><a href="#">Support</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 footer-col">
-					<h3 class="ft-title">Shop</h3>
-					<ul class="ft-list list-h">
-						<li><a href="#">About us</a></li>
-						<li><a href="#">Shipping Metods</a></li>
-						<li><a href="#">Career</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3 foot-cl">
-					<h3 class="ft-title">social</h3>
-					<p>Shoper is made with love in Warsaw,<br>2014 &copy; Template By <a href="http://w3layouts.com/">W3layouts</a></p>
-					<ul class="social">
-						<li><i class="fa"></i></li>
-						<li><i class="tw"></i></li>
-						<li><i class="is"></i></li>
-					</ul>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-		<!-- Footer Menu Ends here --->	
 	</div>
 </section>
+</div>
 </body>
 </html>
