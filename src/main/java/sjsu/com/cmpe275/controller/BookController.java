@@ -46,7 +46,7 @@ public class BookController
 {
    private static Logger _logger = Logger.getLogger(BookController.class);
    String loggedinuser = null;
-   
+   User loggedinUser = new User();
    @Autowired
    private BookService _repo;
    
@@ -248,11 +248,11 @@ public class BookController
       _logger.info(bookInfo.getTitle());
       _logger.info(bookInfo.getDescription());
       
-      
-      _repo.addBookToDB(
+     _repo.addBookToDB(
          bookInfo.getISBN(),
          bookInfo.getDescription(),
-         bookInfo.getTitle()
+         bookInfo.getTitle(), loggedinUser
+         
       );
       
       ModelAndView mav = new ModelAndView("done");
@@ -382,7 +382,7 @@ public class BookController
    	response.setDateHeader("Expires", 0); // Proxies.
    	
        m.addAttribute("user",new User());
-       loggedinuser = user.getUsername();
+       loggedinUser = user;
        System.out.println(user.getUsername());
        System.out.println(user.getPassword());
        if (result.hasErrors()) {
@@ -391,9 +391,21 @@ public class BookController
    	}
        else{
     	   System.out.println("else entered");
+    	   User us =	_repo.findByUserName(user.getUsername(),user.getPassword());
+    	 //  System.out.println("us.getuser"+us.getUsername());
+    		if(us!=null)
+    	   	{
+    			System.out.println("user found");
+    	   		m.addAttribute("user", us.getUsername());
+    	   		return "welcome";
+    	   	}
+    	  // User us =	_repo.findByUserName(user.getUsername());
     	   //search query
-    	   m.addAttribute("username", user);
-    	   return "redirect:/welcome";
+    		else
+    		{
+    			m.addAttribute("error", "User does not exist! Please sign up!");
+    			 return "login";
+    		}
        }
        
    }
@@ -419,23 +431,24 @@ public class BookController
        return "register";
    }
 
-   @RequestMapping(value="/registered", method=RequestMethod.POST)
-   public String register(User user, Model m) 
+   @RequestMapping(value="/registrationConfirmed", method = RequestMethod.POST)
+   public String registration(User user, Model m) 
    {
-   	m.addAttribute("user",new User());
-   	String User = "User";
-   System.out.println(user.getUsername());
-   	User us =	_repo.findByUserName(user.getUsername());
-   	if(us!=null)
-   	{
-   		m.addAttribute("error", "User already exists. Please Sign in");
-   		return "register";
-   	}
-   	else
-   	{
-   		_repo.addUserToDb(user);
-   	}
-   		
-   	   return "welcome";
+	   System.out.println("confirmation called");   
+	   m.addAttribute("user",new User());
+	   	String User = "User";
+	   System.out.println(user.getUsername());
+	   	User us =	_repo.findByUserName(user.getUsername(),user.getPassword());
+	   	if(us!=null)
+	   	{
+	   		m.addAttribute("error", "User already exists. Please Sign in");
+	   		return "Registration";
+	   	}
+	   	else
+	   	{
+	   	 _repo.addUserToDb(user.getUsername(),user.getMobileNo(),user.getPassword(),user.getConfpassword());
+	   		//_repo.addUserToDb(user);
+	   	}
+	   		
+	   	   return "login";
    }
-}

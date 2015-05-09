@@ -45,34 +45,7 @@ public class BookService
       }
    }
    
-   @Transactional
-   public void addBookToDB(String ISBN, String bookDescription, String title)
-   {
-	   Session session = mySessionFactory.getCurrentSession();
-	      
-	      Book book = new Book();
-	      Date dateNow = new Date();
-	      book.setISBN(ISBN);
-	      book.setDescription(bookDescription);
-	      book.setTitle(title);
-	      
-	      Seller bookseller = new Seller();
-	      bookseller.setSellerName("Aku");
-	      bookseller.setSellerEmail("aku@gmail.com");
-	      
-	      bookseller.getBook().add(book);
-	      book.setSeller(bookseller);
-	      
-	 
-	     
-	      session.saveOrUpdate(bookseller);
-	      session.saveOrUpdate(book);
-      
-      
-     
-      
-      //session.saveOrUpdate(book);
-   }
+   
    
    @Transactional
    public void addwantPosttoDB(String ISBN, String bookDescription, String title, double price,Date dateNow)
@@ -165,19 +138,66 @@ public class BookService
 	      session.saveOrUpdate(img); 
    }
    
+  
+   
    @Transactional
-   public void addUserToDb(User user)
+   public void addBookToDB(String ISBN, String bookDescription, String title, User us)
    {
-   mySessionFactory.getCurrentSession().save(user);
+	   Session session = mySessionFactory.getCurrentSession();
+	      
+	      Book book = new Book();
+	 
+	      //UUID x = UUID.randomUUID();
+	      System.out.println("addbooktodb called by seller:"+us.getUsername());
+	      Date dateNow = new Date();
+	      //book.setId(x.toString());
+	      book.setISBN(ISBN);
+	      book.setDescription(bookDescription);
+	      book.setTitle(title);
+	      
+	     // book.setUser(us);
+	     // book.setAuthor(us.getUsername());
+	      //book.setCreateDate(dateNow);
+	      //book.setUpdateDate(dateNow);
+	      
+	      session.saveOrUpdate(book);
+      
+      
+     
+      
+      //session.saveOrUpdate(book);
    }
    
    @Transactional
-	public User findByUserName(String username) {
+   public void addUserToDb(String uname, int mobilenumber, String pwd, String confpwd)
+   {
+	   Session session = mySessionFactory.getCurrentSession();
+   User user = new User();
+   user.setUsername(uname);
+   user.setPassword(pwd);
+
+   user.setMobileNo(mobilenumber);
+   user.setConfpassword(confpwd);// User user = new User();
+   session.save(user);
+   //UUID x = UUID.randomUUID();
+   
+  // Date dateNow = new Date();
+   //book.setId(x.toString());
+ //  book.setISBN(ISBN);
+ //  book.setDescription(bookDescription);
+//   book.setTitle(title);
+   //book.setCreateDate(dateNow);
+   //book.setUpdateDate(dateNow);
+   
+   }
+   
+   @Transactional
+	public User findByUserName(String username, String password) {
 
 		//List<User> users = new ArrayList<User>();
 		//String pass = "rajat";
-		Query query = mySessionFactory.getCurrentSession().createQuery("from User where username = :uname").setParameter("uname", username);
-
+		Query query = mySessionFactory.getCurrentSession().createQuery("from User where username = :uname and password = :pwd").setParameter("uname", username).setParameter("pwd",password);
+System.out.println("book service find by username entered username= "+username+"pwd="+password+" query size="+query.list().size());
 		//UserEntity loadItem= (UserEntity ) sessionFactory.getCurrentSession().get(UserEntity.class, username);
 		//Book load= (Book ) sessionFactory.getCurrentSession().get(Book.class, 1);
 		if (query.list().size() > 0) {

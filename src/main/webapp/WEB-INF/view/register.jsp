@@ -196,7 +196,7 @@ $(function() {
 		</div>
 		<div class="register">
 	  	  <c:if test="${found}">  <h2>Username already taken. Enter new details!</h2>  </c:if>
-	      <form:form id="form" action="registered" method="post" modelAttribute="user" onsubmit="return initialize()"> 
+	      <form:form id="form" action="registrationConfirmed" method="post" modelAttribute="user" onsubmit="return initialize()"> 
 			 <div class="register-top-grid">
 				<h3>PERSONAL INFORMATION</h3>
 				 <div>
