@@ -207,5 +207,9 @@ System.out.println("book service find by username entered username= "+username+"
 		}
 
 	}
+@Transactional
+   public void addFeedbackToDb(Feedback feedback){
+	  mySessionFactory.getCurrentSession().save(feedback); 
+   }
    
 }
