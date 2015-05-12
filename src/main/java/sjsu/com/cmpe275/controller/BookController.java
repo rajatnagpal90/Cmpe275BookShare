@@ -452,3 +452,13 @@ public class BookController
 	   		
 	   	   return "login";
    }
+
+@RequestMapping(value = "/registerfeedback", method = RequestMethod.POST)
+	public String registerFeedback(Feedback feedback, Model m) {
+		//System.out.println("write feed back to database code here !! ");
+	
+		   _repo.addFeedbackToDb(feedback);
+		
+		return "feedback";
+	}
+}
