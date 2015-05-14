@@ -195,8 +195,9 @@ $(function() {
 			<p>Please enter your details.</p>
 		</div>
 		<div class="register">
+		${error}
 	  	  <c:if test="${found}">  <h2>Username already taken. Enter new details!</h2>  </c:if>
-	      <form:form id="form" action="registrationConfirmed" method="post" modelAttribute="user" onsubmit="return initialize()"> 
+	      <form:form id="form" action="registered" method="post" modelAttribute="user" onsubmit="return initialize()"> 
 			 <div class="register-top-grid">
 				<h3>PERSONAL INFORMATION</h3>
 				 <div>
@@ -227,14 +228,15 @@ $(function() {
 							<form:input path="confpassword" type = "password" id="cnfpwdinput" />
 						 </div>
 				 </div>
-			</form:form>
+			
 			<div class="clearfix"> </div>
 			<div class="register-but">
-			   <form>
+			  
 				   <input type="submit" value="submit">
 				   <div class="clearfix"> </div>
-			   </form>
+			   
 			</div>
+			</form:form>
 	   </div>
 	</div>
 </section>

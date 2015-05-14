@@ -1,7 +1,10 @@
 package sjsu.com.cmpe275.entity;
  
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,25 +18,12 @@ public class User {
  
 	private String username;
 	private String password;
-	private boolean enabled;
-	private int mobileNo;
 	private String confpassword;
-	public int getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(int mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-	public String getConfpassword() {
-		return confpassword;
-	}
-
-	public void setConfpassword(String confpassword) {
-		this.confpassword = confpassword;
-	}
-
+	private int mobileNo;
+	
+   
+	
+	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
  
 	public User() {
@@ -52,7 +42,8 @@ public class User {
 		this.enabled = enabled;
 		this.userRole = userRole;
 	}
- 
+	
+	
 	@Id
 	@Column(name = "username", unique = true, 
 		nullable = false, length = 45)
@@ -91,5 +82,23 @@ public class User {
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
 	}
+
+	public String getConfpassword() {
+		return confpassword;
+	}
+
+	public void setConfpassword(String confpassword) {
+		this.confpassword = confpassword;
+	}
+
+	public int getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(int mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+	
+  
  
 }

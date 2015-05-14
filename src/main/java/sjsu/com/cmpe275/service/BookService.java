@@ -2,10 +2,9 @@ package sjsu.com.cmpe275.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
-import org.hibernate.Query;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextSession;
@@ -16,10 +15,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import sjsu.com.cmpe275.entity.Book;
+import sjsu.com.cmpe275.entity.Feedback;
 import sjsu.com.cmpe275.entity.Image;
 import sjsu.com.cmpe275.entity.Post;
 import sjsu.com.cmpe275.entity.User;
-import sjsu.com.cmpe275.entity.Seller;
 
 @Repository
 @SuppressWarnings("unchecked")
@@ -168,7 +167,7 @@ public class BookService
       //session.saveOrUpdate(book);
    }
    
-   @Transactional
+   /*@Transactional
    public void addUserToDb(String uname, int mobilenumber, String pwd, String confpwd)
    {
 	   Session session = mySessionFactory.getCurrentSession();
@@ -198,6 +197,29 @@ public class BookService
 		//String pass = "rajat";
 		Query query = mySessionFactory.getCurrentSession().createQuery("from User where username = :uname and password = :pwd").setParameter("uname", username).setParameter("pwd",password);
 System.out.println("book service find by username entered username= "+username+"pwd="+password+" query size="+query.list().size());
+		//UserEntity loadItem= (UserEntity ) sessionFactory.getCurrentSession().get(UserEntity.class, username);
+		//Book load= (Book ) sessionFactory.getCurrentSession().get(Book.class, 1);
+		if (query.list().size() > 0) {
+			return (User)query.list().get(0);
+		} else {
+			return null;
+		}
+
+	}*/
+   
+   @Transactional
+   public void addUserToDb(User user)
+   {
+   mySessionFactory.getCurrentSession().save(user);
+   }
+   
+   @Transactional
+	public User findByUserName(String username) {
+
+		//List<User> users = new ArrayList<User>();
+		//String pass = "rajat";
+		Query query = mySessionFactory.getCurrentSession().createQuery("from User where username = :uname").setParameter("uname", username);
+
 		//UserEntity loadItem= (UserEntity ) sessionFactory.getCurrentSession().get(UserEntity.class, username);
 		//Book load= (Book ) sessionFactory.getCurrentSession().get(Book.class, 1);
 		if (query.list().size() > 0) {

@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE HTML>
 <html>
 <head>
 <title>CMPE 275 Book-Store</title>
+<meta http-equiv="Refresh" content="5;url=index.html">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.0.min.js"></script>
@@ -83,7 +82,7 @@ $(function() {
 				<div class="navigation-right">
 					<ul class="user">
 						<li>
-							<span></span><a href="login.html">${currentView}</a>
+							<span></span><a href="login.html">Log In</a>
 						</li>
 						<li>
 							<span class="bascket"></span><a href="bascket.html">Basket(0)</a>
@@ -95,7 +94,7 @@ $(function() {
 				</div>
 				<div class="clearfix"></div>
 				<div class="serch">
-							<form action="doSearch" method="post">
+								<form action="doSearch" method="post">
 								<span>
 					      			<input type="text" placeholder="Search" name="searchText" />
 									<input type="submit" value="" />
@@ -105,11 +104,10 @@ $(function() {
 				<script>
 					$( "button.search" ).click(function() {
 					  $( ".serch" ).slideToggle( "slow", function() {
-						  
+					    // Animation complete.
 					  });
 					});
 				</script>
-				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
@@ -119,111 +117,19 @@ $(function() {
 <div class="container">
 <section id="main">
 	<div class="content">
-		<!-- Banner Starts Here --->
-		<div class="banner">
-			<h1>Book Store</h1>
-			<small>Buyers Sellers Books</small>
-			<div class="ban-btn">
-				<a href="books.html">View Books</a>
-			</div>
+		<div class="pag-nav">
+			<ul class="p-list">
+				<li><a href="index.html">Home</a></li> &nbsp;&nbsp;/&nbsp;
+				<li class="act">&nbsp;Feedback</li>
+			</ul>
 		</div>
-		<!-- Banner Ends Here --->
-		<!-- Gallery Starts Here --->
-		<div class="gallery">
-			<div class="gallery-row">
-				<div class="gallery-grid">
-					<div class="grid-top img-pos"><img src="${pageContext.request.contextPath}/resources/images/p1.jpg" alt="" class="img-responsive">
-						<div class="img-caption jk-t">
-							<p>ROMANTIC<br>LOVE STORIES</p>
-							<small>from $50.00</small>
-						</div>
-					</div>
-					<div class="grid-bot img-pos"><img src="${pageContext.request.contextPath}/resources/images/p2.jpg" alt="" class="img-responsive">
-					    <div class="img-caption jk-t">
-							<p>NON-FICTION <br> REAL LIFE</p>
-							<small>from $99.00</small>
-					    </div>
-					</div>
-				</div>
-				<div class="gallery-grid1">
-					<div class="grid1-row1">
-						<div class="g1-r2">
-							<div class="twit t-wit">
-								<span class="line"></span>
-								<i class="twit-icon"></i>
-								<span class="line"></span>
-								<p>Best Seller Worldwide <br> Must Read Books Category</p>
-								<small>@NYTimes </small>
-							</div>
-							<div class="twit img-pos"><img src="${pageContext.request.contextPath}/resources/images/p3.jpg" alt="" class="img-responsive">
-							<div class="img-caption jk-t">
-							<p>FICTION <br> ACTION</p>
-							<small>from $99.00</small>
-							</div></div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="g1-r2">
-							<div class="twit img-pos"><img src="${pageContext.request.contextPath}/resources/images/p4.jpg" alt="" class="img-responsive">
-								<div class="img-caption jk-t">
-									<p>CARTOON</p>
-									<small>from $69.00</small>
-								</div>
-							</div>
-							<div class="twit t-wit">
-								<span class="line"></span>
-								<i class="twit-icon"></i>
-								<span class="line"></span>
-								<p>Trending Books to watch out for!</p>
-								<small>@J K Rowling</small>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="grid1-row2">
-						<div class="twit t-hat">
-							<i class="aarow"></i>
-							<p>Really</p>
-							<small>Great Platform</small>
-						</div>
-						<div class="twit img-pos"><img src="${pageContext.request.contextPath}/resources/images/p5.jpg" alt="" class="img-responsive">
-							<div class="img-caption jk-t">
-									<p>Cook Books</p>
-									<small>from $199.00</small>
-								</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="gallery-grid">
-					<div class="grid-bot t-hat">
-						<i class="aarow"></i>
-						<p>Buyers Sellers</p>
-						<small>One Place</small>
-					</div>
-					<div class="grid-top img-pos"><img src="${pageContext.request.contextPath}/resources/images/p6.jpg" alt="" class="img-responsive respon">
-						<div class="img-caption">
-							<p>FASHION<br>ADVENTURE</p>
-							<small>from $200.00</small>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
+		<div class="coats sing-c">
+			<h3 class="c-head">Congrats!</h3>
+			<p>Your feedback has been sent!</p>
+			<p>Thanks for sharing it with us!</p>
 		</div>
-		<div>
-		<p> </p>
-		</div>
-		<div class="footer">
-			<div class="row footer-row">
-			
-				<div class="clearfix"></div>
-			</div>
-		</div>
-		<!-- Footer Menu Ends here --->
 	</div>
 </section>
 </div>
-	<!-- Header Part Starts Here -->
 </body>
 </html>

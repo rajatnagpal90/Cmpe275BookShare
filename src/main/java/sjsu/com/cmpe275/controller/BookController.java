@@ -1,23 +1,11 @@
 package sjsu.com.cmpe275.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.twilio.sdk.TwilioRestClient;
-import com.twilio.sdk.TwilioRestException;
-import com.twilio.sdk.resource.factory.MessageFactory;
-import com.twilio.sdk.resource.instance.Message;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -36,10 +24,16 @@ import org.springframework.web.servlet.ModelAndView;
 import sjsu.com.cmpe275.Model.BookModel;
 import sjsu.com.cmpe275.Model.PostModel;
 import sjsu.com.cmpe275.entity.Book;
+import sjsu.com.cmpe275.entity.Feedback;
 import sjsu.com.cmpe275.entity.Image;
 import sjsu.com.cmpe275.entity.Post;
 import sjsu.com.cmpe275.entity.User;
 import sjsu.com.cmpe275.service.BookService;
+
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.resource.factory.MessageFactory;
+import com.twilio.sdk.resource.instance.Message;
 
 @Controller
 public class BookController
@@ -54,8 +48,8 @@ public class BookController
    private static String AUTH_TOKEN = "abb23d41fd23fa5a5fc703fd80ae3290";
    
    @RequestMapping(value = "/index", method = RequestMethod.GET)
-   public ModelAndView FirstPage()
-   {
+   public ModelAndView FirstPage(Model model)
+   {  model.addAttribute("currentView", "Log In");
       ModelAndView mav = new ModelAndView("index");
       return mav;
    }
@@ -154,9 +148,10 @@ public class BookController
    }
    
    @RequestMapping(value = "/feedback", method = RequestMethod.GET)
-   public ModelAndView FeedbackPage()
+   public ModelAndView FeedbackPage(Model model, Feedback feedback)
    {
-      ModelAndView mav = new ModelAndView("feedback");
+      model.addAttribute("feedback", feedback);
+	  ModelAndView mav = new ModelAndView("feedback");
       return mav;
    }
    
@@ -326,7 +321,7 @@ public class BookController
       return mav;
    }
    
-   @RequestMapping(value="/login", method = RequestMethod.GET)
+   /*@RequestMapping(value="/login", method = RequestMethod.GET)
    public String userLogin(Model m) {
       
        m.addAttribute("user",new User());
@@ -338,9 +333,9 @@ public class BookController
       
        m.addAttribute("user",new User());
        return "login";
-   }
+   }*/
    
-   @RequestMapping(value="/sessionLogout", method = RequestMethod.GET)
+   /*@RequestMapping(value="/sessionLogout", method = RequestMethod.GET)
    public String userLogout(HttpServletRequest request,HttpServletResponse response, User user , Model m, BindingResult result)
    {
    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -372,10 +367,10 @@ public class BookController
    	
    	return "login";
    }
-
+*/
    
    
-   @RequestMapping(value="/validating", method = RequestMethod.POST)
+   /*@RequestMapping(value="/validating", method = RequestMethod.POST)
    public String validateLogin(HttpServletRequest request,HttpServletResponse response, User user , Model m, BindingResult result)  {
    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
    	response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
@@ -408,7 +403,7 @@ public class BookController
     		}
        }
        
-   }
+   }*/
    
     
  /*  @RequestMapping(value="/Registration", method = RequestMethod.GET)
@@ -417,7 +412,7 @@ public class BookController
 	  return "welcome";
    }
   */ 
-   @RequestMapping(value="/register", method = RequestMethod.GET)
+   /*@RequestMapping(value="/register", method = RequestMethod.GET)
    public String regUser(Model m) {
    	System.out.println("registration called");
        m.addAttribute("user",new User());
@@ -428,21 +423,23 @@ public class BookController
    public String regLogin(Model m, User user) {
    	
        m.addAttribute("user",new User());
+       System.out.println("hello");
        return "register";
-   }
+   }*/
 
-   @RequestMapping(value="/registrationConfirmed", method = RequestMethod.POST)
+   /*@RequestMapping(value="/registrationConfirmed", method = RequestMethod.POST)
    public String registration(User user, Model m) 
    {
 	   System.out.println("confirmation called");   
 	   m.addAttribute("user",new User());
-	   	String User = "User";
+	   	//String User = "User";
 	   System.out.println(user.getUsername());
 	   	User us =	_repo.findByUserName(user.getUsername(),user.getPassword());
 	   	if(us!=null)
 	   	{
 	   		m.addAttribute("error", "User already exists. Please Sign in");
-	   		return "Registration";
+	   		System.out.println("apoorva");
+	   		return "register";
 	   	}
 	   	else
 	   	{
@@ -451,14 +448,120 @@ public class BookController
 	   	}
 	   		
 	   	   return "login";
-   }
+   }*/
 
 @RequestMapping(value = "/registerfeedback", method = RequestMethod.POST)
-	public String registerFeedback(Feedback feedback, Model m) {
+	public String registerFeedback(Feedback feedback, Model model) {
 		//System.out.println("write feed back to database code here !! ");
-	
+		model.addAttribute("feedback", feedback);
 		   _repo.addFeedbackToDb(feedback);
 		
-		return "feedback";
+		return "feedbackDone";
 	}
+
+@RequestMapping(value="/login", method = RequestMethod.GET)
+public String userLogin(Model m) {
+   
+    m.addAttribute("user",new User());
+    return "login";
+}
+
+@RequestMapping(value="/login", method = RequestMethod.POST)
+public String fromLogout(Model m) {
+   
+    m.addAttribute("user",new User());
+    return "login";
+}
+
+@RequestMapping(value="/validating", method = RequestMethod.POST)
+public String validateLogin(HttpServletRequest request,HttpServletResponse response, User user , Model m, BindingResult result)  {
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+	response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+	response.setDateHeader("Expires", 0); // Proxies.
+	System.out.println("im in validating");
+    m.addAttribute("user",new User());
+    loggedinuser = user.getUsername();
+    System.out.println(user.getUsername());
+    System.out.println(user.getPassword());
+    
+    if (result.hasErrors()) {
+		System.out.print("abc");
+	    return "login";
+	}
+    else{
+ 	   System.out.println("else entered");
+ 	   //search query
+ 	   m.addAttribute("username", user);
+ 	   m.addAttribute("currentView", user.getUsername());
+ 	   return "index";
+    }
+    
+}
+
+@RequestMapping(value="/register", method = RequestMethod.GET)
+public String regUser(Model m) {
+	System.out.println("registration called");
+    m.addAttribute("user",new User());
+    return "register";
+}
+
+@RequestMapping(value="/register", method = RequestMethod.POST)
+public String regLogin(Model m, User user) {
+	System.out.println("hello");
+    m.addAttribute("user",new User());
+    return "register";
+}
+
+@RequestMapping(value="/registered", method=RequestMethod.POST)
+public String register(User user, Model m) 
+{	
+	m.addAttribute("user",new User());
+	//String User = "User";
+    System.out.println(user.getUsername());
+	User us =	_repo.findByUserName(user.getUsername());
+	if(us!=null)
+	{
+		m.addAttribute("error", "User already exists. Please Sign in");
+		return "register";
+	}
+	else
+	{
+		_repo.addUserToDb(user);
+	}
+		m.addAttribute("currentView", user.getUsername());
+	   return "index";
+}	
+
+@RequestMapping(value="/sessionLogout", method = RequestMethod.GET)
+public String userLogout(HttpServletRequest request,HttpServletResponse response, User user , Model m, BindingResult result)
+{
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+	response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+	response.setDateHeader("Expires", 0); // Proxies.
+	
+	Cookie cookie = null;
+	   Cookie[] cookies = null;
+	   // Get an array of Cookies associated with this domain
+	   cookies = request.getCookies();
+	   if( cookies != null ){
+		   System.out.println("<h2> Found Cookies Name and Value</h2>");
+	      for (int i = 0; i < cookies.length; i++){
+	         cookie = cookies[i];
+	        // if((cookie.getName( )).compareTo("user") == 0 ){
+	            cookie.setMaxAge(0);
+	            response.addCookie(cookie);
+	           System.out.print("Deleted cookie: " + 
+	            cookie.getName( ) + "<br/>");
+	       //  }
+	         System.out.print("Name : " + cookie.getName( ) + ",  ");
+	         System.out.print("Value: " + cookie.getValue( )+" <br/>");
+	      }
+	  }else{
+		  System.out.println(
+	      "<h2>No cookies founds</h2>");
+	  }
+
+	
+	return "login";
+}
 }

@@ -9,7 +9,7 @@ import sjsu.com.cmpe275.Model.UserModel;
 
 @Controller
 public class LoginController {
-	
+	/*
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	   public ModelAndView login() throws Exception
 	   {
@@ -33,5 +33,5 @@ public class LoginController {
 		   ModelAndView mav = new ModelAndView("signup", "command", new UserModel());
 		   return mav;
 	   }
-
+*/
 }
