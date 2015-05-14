@@ -86,7 +86,7 @@ $(function() {
 							<span></span><a href="login.html">${currentView}</a>
 						</li>
 						<li>
-							<span class="bascket"></span><a href="bascket.html">Basket(0)</a>
+							<span class="bascket"></span><a href="logout.html">Logout</a>
 						</li>
 						<li>
 							<button class="search"></button>

@@ -27,10 +27,10 @@ public class UserController {
 	        return "denied";
 	    }
 	 
-	    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+	    /*@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	    public String logout(ModelMap model) {
 	        return "logout";
-	    }
+	    }*/
 	    
 	   
 }

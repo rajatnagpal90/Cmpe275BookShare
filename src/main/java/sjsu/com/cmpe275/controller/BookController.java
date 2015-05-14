@@ -44,6 +44,9 @@ public class BookController
    @Autowired
    private BookService _repo;
    
+   private static String username = "";
+   private static String viewName = "";
+   
    private static String ACCOUNT_SID = "ACf73ce7345740ebac0c6fc7008bdb494c";
    private static String AUTH_TOKEN = "abb23d41fd23fa5a5fc703fd80ae3290";
    
@@ -55,22 +58,45 @@ public class BookController
    }
    
    @RequestMapping(value = "/buyers", method = RequestMethod.GET)
-   public ModelAndView buyer()
-   {
+   public ModelAndView buyer(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+      }
+      else{
+       m.addAttribute("currentView", "Log In");	  
+      }
+	  
       ModelAndView mav = new ModelAndView("buyers");
       return mav;
    }
    
+   @RequestMapping(value = "/logout", method = RequestMethod.GET)
+   public ModelAndView LogoutPage(Model m)
+   {  m.addAttribute("currentView", "Log In");
+      ModelAndView mav = new ModelAndView("logout");
+      return mav;
+   }
+   
    @RequestMapping(value = "/sellers", method = RequestMethod.GET)
-   public ModelAndView seller()
-   {
+   public ModelAndView seller(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+      }
+      else{
+       m.addAttribute("currentView", "Log In");	  
+      }
       ModelAndView mav = new ModelAndView("sellers");
       return mav;
    }
    
    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-   public ModelAndView upload()
-   {
+   public ModelAndView upload(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       ModelAndView mav = new ModelAndView("upload");
       return mav;
    }
@@ -104,28 +130,48 @@ public class BookController
    
    @RequestMapping(value = "/uploadform", method = RequestMethod.GET)
    public ModelAndView upDonePage(Model model)
-   {  
+   {  if(!username.equalsIgnoreCase("")){
+	   model.addAttribute("currentView", username);
+   }
+   else{
+    model.addAttribute("currentView", "Log In");	  
+   }
 	  ModelAndView mav = new ModelAndView("uploadform","command", new Image());
       return mav;
    }
    
    @RequestMapping(value = "/books", method = RequestMethod.GET)
-   public ModelAndView FPage()
-   {
+   public ModelAndView FPage(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       ModelAndView mav = new ModelAndView("books");
       return mav;
    }
    
    @RequestMapping(value = "book/books", method = RequestMethod.GET)
-   public ModelAndView bookPage()
-   {
+   public ModelAndView bookPage(Model m)
+   {	if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       ModelAndView mav = new ModelAndView("books");
       return mav;
    }
    
    @RequestMapping(value = "/Mywishlist", method = RequestMethod.GET)
-   public ModelAndView mywishList() throws Exception
-   {
+   public ModelAndView mywishList(Model m) throws Exception
+   {	if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
 	   
 	   List<Post> allFound = _repo.listallBooks();
 	   List<PostModel> postModels = new ArrayList<PostModel>();
@@ -149,15 +195,25 @@ public class BookController
    
    @RequestMapping(value = "/feedback", method = RequestMethod.GET)
    public ModelAndView FeedbackPage(Model model, Feedback feedback)
-   {
+   {  if(!username.equalsIgnoreCase("")){
+	   model.addAttribute("currentView", username);
+   }
+   else{
+    model.addAttribute("currentView", "Log In");	  
+   }
       model.addAttribute("feedback", feedback);
 	  ModelAndView mav = new ModelAndView("feedback");
       return mav;
    }
    
    @RequestMapping(value = "/about", method = RequestMethod.GET)
-   public ModelAndView AboutPage()
-   {
+   public ModelAndView AboutPage(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       ModelAndView mav = new ModelAndView("about");
       return mav;
    }
@@ -176,16 +232,21 @@ public class BookController
 //      return mav;
 //   }
    
-   @RequestMapping(value = "/bascket", method = RequestMethod.GET)
+   /*@RequestMapping(value = "/bascket", method = RequestMethod.GET)
    public ModelAndView BasketPage()
    {
       ModelAndView mav = new ModelAndView("bascket");
       return mav;
-   }
+   }*/
    
    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
-   public ModelAndView getBookPage(@PathVariable("id") String isbn )
-   {
+   public ModelAndView getBookPage(@PathVariable("id") String isbn, Model m )
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
 	  
       ModelAndView mav = new ModelAndView("book");
      
@@ -194,8 +255,13 @@ public class BookController
    }
    
    @RequestMapping(value = "/book/buy", method = RequestMethod.GET)
-   public ModelAndView getBuyPage()
-   {
+   public ModelAndView getBuyPage(Model m)
+   {	if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
 	   ModelAndView mav = new ModelAndView("buy");
 	   System.out.println("inside sendmessage");
        Message message = null;
@@ -218,8 +284,13 @@ public class BookController
    }
    
    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-   public ModelAndView welcome() throws Exception
-   {
+   public ModelAndView welcome(Model m) throws Exception
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       _repo.indexBooks();
 
       ModelAndView mav = new ModelAndView("welcome");
@@ -227,8 +298,13 @@ public class BookController
    }
 
    @RequestMapping(value = "/addBook", method = RequestMethod.GET)
-   public ModelAndView addBookPage()
-   {
+   public ModelAndView addBookPage(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       ModelAndView mav = new ModelAndView("addBook", "command", new BookModel());
       return mav;
    }
@@ -236,9 +312,14 @@ public class BookController
    @RequestMapping(value = "/addBookToDB", method = RequestMethod.POST)
    public ModelAndView addBookToDB(
       @ModelAttribute("BookModel")
-      BookModel bookInfo
+      BookModel bookInfo, Model m
    ) throws Exception
-   {
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       _logger.info(bookInfo.getISBN());
       _logger.info(bookInfo.getTitle());
       _logger.info(bookInfo.getDescription());
@@ -256,8 +337,13 @@ public class BookController
    }
    
    @RequestMapping(value = "/wantBook", method = RequestMethod.GET)
-   public ModelAndView wantBookPage()
-   {
+   public ModelAndView wantBookPage(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       ModelAndView mav = new ModelAndView("wantBook", "command", new PostModel());
       return mav;
    }
@@ -265,9 +351,14 @@ public class BookController
    @RequestMapping(value = "/addwantPost", method = RequestMethod.POST)
    public ModelAndView addwantPosttoDB(
       @ModelAttribute("postinfo")
-      PostModel postinfo
+      PostModel postinfo, Model m
    ) throws Exception
-   {
+   { if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       _logger.info(postinfo.getISBN());
       _logger.info(postinfo.getTitle());
       _logger.info(postinfo.getDescription());
@@ -291,8 +382,13 @@ public class BookController
    }
    
    @RequestMapping(value = "/search", method = RequestMethod.GET)
-   public ModelAndView searchPage()
-   {
+   public ModelAndView searchPage(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       ModelAndView mav = new ModelAndView("search");
       return mav;
    }
@@ -300,9 +396,14 @@ public class BookController
    @RequestMapping(value = "/doSearch", method = RequestMethod.POST)
    public ModelAndView search(
       @RequestParam("searchText")
-      String searchText
+      String searchText, Model m
    ) throws Exception
-   {
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+   }
+   else{
+    m.addAttribute("currentView", "Log In");	  
+   }
       List<Book> allFound = _repo.searchForBook(searchText);
       List<BookModel> bookModels = new ArrayList<BookModel>();
       
@@ -452,6 +553,12 @@ public class BookController
 
 @RequestMapping(value = "/registerfeedback", method = RequestMethod.POST)
 	public String registerFeedback(Feedback feedback, Model model) {
+	if(!username.equalsIgnoreCase("")){
+		   model.addAttribute("currentView", username);
+	      }
+	      else{
+	       model.addAttribute("currentView", "Log In");	  
+	      }
 		//System.out.println("write feed back to database code here !! ");
 		model.addAttribute("feedback", feedback);
 		   _repo.addFeedbackToDb(feedback);
@@ -461,14 +568,24 @@ public class BookController
 
 @RequestMapping(value="/login", method = RequestMethod.GET)
 public String userLogin(Model m) {
-   
+	if(!username.equalsIgnoreCase("")){
+		   m.addAttribute("currentView", username);
+	      }
+	      else{
+	       m.addAttribute("currentView", "Log In");	  
+	      }
     m.addAttribute("user",new User());
     return "login";
 }
 
 @RequestMapping(value="/login", method = RequestMethod.POST)
 public String fromLogout(Model m) {
-   
+	if(!username.equalsIgnoreCase("")){
+		   m.addAttribute("currentView", username);
+	      }
+	      else{
+	       m.addAttribute("currentView", "Log In");	  
+	      }
     m.addAttribute("user",new User());
     return "login";
 }
@@ -483,7 +600,12 @@ public String validateLogin(HttpServletRequest request,HttpServletResponse respo
     loggedinuser = user.getUsername();
     System.out.println(user.getUsername());
     System.out.println(user.getPassword());
-    
+    if(!username.equalsIgnoreCase("")){
+ 	   m.addAttribute("currentView", username);
+       }
+       else{
+        m.addAttribute("currentView", "Log In");	  
+       }
     if (result.hasErrors()) {
 		System.out.print("abc");
 	    return "login";
@@ -492,14 +614,21 @@ public String validateLogin(HttpServletRequest request,HttpServletResponse respo
  	   System.out.println("else entered");
  	   //search query
  	   m.addAttribute("username", user);
+ 	   username = user.getUsername();
  	   m.addAttribute("currentView", user.getUsername());
- 	   return "index";
+ 	   return "welcome";
     }
     
 }
 
 @RequestMapping(value="/register", method = RequestMethod.GET)
 public String regUser(Model m) {
+	if(!username.equalsIgnoreCase("")){
+		   m.addAttribute("currentView", username);
+	      }
+	      else{
+	       m.addAttribute("currentView", "Log In");	  
+	      }
 	System.out.println("registration called");
     m.addAttribute("user",new User());
     return "register";
@@ -507,6 +636,12 @@ public String regUser(Model m) {
 
 @RequestMapping(value="/register", method = RequestMethod.POST)
 public String regLogin(Model m, User user) {
+	if(!username.equalsIgnoreCase("")){
+		   m.addAttribute("currentView", username);
+	      }
+	      else{
+	       m.addAttribute("currentView", "Log In");	  
+	      }
 	System.out.println("hello");
     m.addAttribute("user",new User());
     return "register";
@@ -528,8 +663,9 @@ public String register(User user, Model m)
 	{
 		_repo.addUserToDb(user);
 	}
-		m.addAttribute("currentView", user.getUsername());
-	   return "index";
+	username = user.getUsername();
+	m.addAttribute("currentView", user.getUsername());
+	return "welcome";
 }	
 
 @RequestMapping(value="/sessionLogout", method = RequestMethod.GET)

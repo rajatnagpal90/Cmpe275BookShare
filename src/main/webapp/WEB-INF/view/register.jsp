@@ -148,11 +148,8 @@ $(function() {
 				</div>
 				<div class="navigation-right">
 					<ul class="user">
-						<li>
-							<span></span><a href="login.html">Log In</a>
-						</li>
-						<li>
-							<span class="bascket"></span><a href="bascket.html">Basket(0)</a>
+						<li><span></span><a href="login.html">${currentView}</a></li>
+									<li><span class="bascket"></span><a href="logout.html">Logout</a>
 						</li>
 						<li>
 							<button class="search"></button>
@@ -231,10 +228,10 @@ $(function() {
 			
 			<div class="clearfix"> </div>
 			<div class="register-but">
-			  
+			  <div class="text">
 				   <input type="submit" value="submit">
 				   <div class="clearfix"> </div>
-			   
+			   </div>
 			</div>
 			</form:form>
 	   </div>
