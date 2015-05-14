@@ -89,6 +89,18 @@ public class BookController
       return mav;
    }
    
+   @RequestMapping(value = "/messages", method = RequestMethod.GET)
+   public ModelAndView MessagePage(Model m)
+   {  if(!username.equalsIgnoreCase("")){
+	   m.addAttribute("currentView", username);
+      }
+      else{
+       m.addAttribute("currentView", "Log In");	  
+      }
+      ModelAndView mav = new ModelAndView("messages");
+      return mav;
+   }
+   
    @RequestMapping(value = "/upload", method = RequestMethod.POST)
    public ModelAndView upload(Model m)
    {  if(!username.equalsIgnoreCase("")){

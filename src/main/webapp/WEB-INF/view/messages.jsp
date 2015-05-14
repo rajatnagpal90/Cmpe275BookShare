@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 <html>
 <head>
 <title>CMPE 275 Book-Store</title>
+<meta http-equiv="Refresh" content="5;url=index.html">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.0.min.js"></script>
@@ -51,72 +50,6 @@ $(function() {
 });
 </script>
 </head>
-<script>
-    function initialize()
-    {
-    var x = document.getElementById("form").elements.length;
-    for(var i =0; i<x-1;i++)
-    {
-         var field = document.getElementById("form").elements[i].value ;
-         if(field == "")
-         {
-         alert("values missing");
-         return false;
-         }
-    }
-         if (document.getElementById("pwdinput"))
-         {
-         	if(document.getElementById("pwdinput").value.length<6)
-         	{
-         alert("password must be atleast 6 characters long");
-         return false;
-         	}
-        	 else if(document.getElementById("pwdinput").value != document.getElementById("cnfpwdinput").value)
-        	 {
-         alert("Passwords do not match");
-         return false;
-         	}
-         
-         }
-         
-         if(document.getElementById("mailInput").value != "")
-         {
-        var x = document.getElementById("mailInput").value;
-    	var atpos = x.indexOf("@");
-   		var dotpos = x.lastIndexOf(".");
-    	if (atpos< 1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-        alert("Not a valid e-mail address");
-        return false;
-  		  }
-         
-         }
-         if(document.getElementById("mobileInput").value != "")
-         {
-         var mobile = document.getElementById("mobileInput").value;
-          if (/^\d{10}$/.test(mobile))
-            return true;
-            else
-            {
-            alert("Enter valid moile number");
-            return false;
-            }
-         
-         }
-        if(document.getElementById("accCodeInput").value !="")
-         {
-         alert("Code must be atleast 5 characters");
-        if(document.getElementById("accCodeInput").value.length<5)
-         {
-         alert("Code must be atleast 5 characters");
-         return false;
-         }
-         } 
-     
-    	return true;
-   
-    }
-    
-    </script>
 <body>
 	<!-- Header Part Starts Here -->
 <div class="header">
@@ -149,8 +82,8 @@ $(function() {
 				<div class="navigation-right">
 					<ul class="user">
 						<li><span></span><a href="login.html">${currentView}</a></li>
-									<li><span class="bascket"></span><a href="logout.html">Logout</a>
-						</li>
+							<li><span class="bascket"></span><a href="logout.html">Logout</a>
+						</li> 
 						<li>
 							<button class="search"></button>
 						</li>
@@ -184,57 +117,14 @@ $(function() {
 		<div class="pag-nav">
 			<ul class="p-list">
 				<li><a href="index.html">Home</a></li> &nbsp;&nbsp;/&nbsp;
-				<li class="act">&nbsp;Register</li>
+				<li class="act">&nbsp;Messages</li>
 			</ul>
 		</div>
-		<div class="coats">
-			<h3 class="c-head">Register Here</h3>
-			<p>Please enter your details.</p>
+		<div class="coats sing-c">
+			<h3 class="c-head">Congrats</h3>
+			<p>Your Interest for the book has been acknowledged by the seller!</p>
+			<!-- <p>Thanks for sharing it with us!</p> -->
 		</div>
-		<div class="register">
-		${error}
-	  	  <c:if test="${found}">  <h2>Username already taken. Enter new details!</h2>  </c:if>
-	      <form:form id="form" action="registered" method="post" modelAttribute="user" onsubmit="return initialize()"> 
-			 <div class="register-top-grid">
-				<h3>PERSONAL INFORMATION</h3>
-				 <div>
-					<span>User Name<label>*</label></span>
-					<form:input path="username" id="nameInput" />
-				 </div>
-				 <!-- <div>
-					<span>Last Name<label>*</label></span>
-					<input type="text"> 
-				 </div>-->
-				 <div>
-					 <span>Mobile Number<label>*</label></span>
-					 <form:input path="mobileNo" id="mobileInput" /> 
-				 </div>
-				 <div class="clearfix"> </div>
-				   <a class="news-letter" href="#">
-					 <label><i> </i>Enter your mobile number for notification.</label>
-				   </a>
-				 </div>
-			     <div class="register-bottom-grid">
-					    <h3>LOGIN INFORMATION</h3>
-						 <div>
-							<span>Password<label>*</label></span>
-							<form:input path="password" type = "password" id="pwdinput" />
-						 </div>
-						 <div>
-							<span>Confirm Password<label>*</label></span>
-							<form:input path="confpassword" type = "password" id="cnfpwdinput" />
-						 </div>
-				 </div>
-			
-			<div class="clearfix"> </div>
-			<div class="register-but">
-			  
-				   <input type="submit" value="submit">
-				   <div class="clearfix"> </div>
-			   
-			</div>
-			</form:form>
-	   </div>
 	</div>
 </section>
 </div>

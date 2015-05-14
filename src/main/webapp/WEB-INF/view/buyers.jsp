@@ -140,6 +140,15 @@ $(function() {
 				</div>
 				</a>
 			</div>
+			<hr />
+			<div class="col-md-6 about-col">
+			    <a href="messages.html">
+				<img src="${pageContext.request.contextPath}/resources/images/best.jpg" alt="" class="img-responsive" height="42" width="42">
+				<div class="who">
+					<h3>Messages</h3>
+				</div>
+				</a>
+			</div>
 			<div class="clearfix"></div>
 		</div>						
 	</div>
