@@ -127,18 +127,40 @@ $(function() {
 			<div class="col-md-6 about-col">
 				<img src="${pageContext.request.contextPath}/resources/images/about1.jpg" alt="" class="img-responsive">
 				<div class="who">
-					<h3>Who we are?</h3>
-					<p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. </p>
-					<p>Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, </p>
+					<h3>What motivated us?</h3>
+					<pre>
+The part of electronic commerce has been the most persuasive business use in World Wide Web. E-business has ended up being the best stage joining clients to the traders and permitting them to pursuit and purchase items from their home or from their portable devices. The business-to-trade deals from e-trade came to up to $350 billion in year 2014 and it will reach to $1.4 trillion in 2015. E-Commerce Giants like Amazon, Alibaba, and eBay has been the real players in the field of e business. Our task is expected to take in the ideas of e-trade site and how the site functions in the back-end. The goal of this project is to fabricate a web application that associates with a server in the cloud in the meantime actualizing and practicing standards and techniques of Inversion of Control, Aspect Oriented Programming, Object social mapping and exchanges. We are building San Jose Book Store web application which will incorporate all the aforementioned strategies with a few different highlights added to it. San Jose Book store is the ecommerce web application that students can use to share and offer utilized course books. We are meaning to give an online platform to SJSU students to purchase and offer books to different students. Students can enroll on our site to include posting for offering the books, give criticism to purchasers and venders, purchase and hunt books from book postings. We are utilizing JAVA spring as our back-end structure for our book shop. Our task is meant to give an answer for SJSU students to share their notes and books which can help them for their studies.
+The inspiration driving this thought was that as present students of SJSU, we too confront the issue of purchasing new books each semester for all the subjects. We needed an answer for the present issue where we could without much of a stretch purchase course books at economic costs and offer them back after the semester to different students needing the book. We thought of this thought to manufacture a platform for students in a specific region to share their books, purchase or offer them. As a term project, we additionally needed to execute all the innovations we learned in the subject. We thought building up an e-trade site would fuse every one of them, subsequently, we decided to construct an online book shop application
+
+					</pre>
 				</div>
 			</div>
 			<div class="col-md-6 about-col">
 				<img src="${pageContext.request.contextPath}/resources/images/about2.jpg" alt="" class="img-responsive">
 				<div class="who">
 					<h3>What we are doing?</h3>
-					<p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. </p>
-					<p>Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id, </p>
-				</div>
+					<pre>
+Account Creation: 
+User can register himself by creating profile for online trading of book. He will be presented with a login page where new user can have an option to register themselves by filling up the detailed form. The form will contain important details about the user so as to authenticate him and to prevent fraudulent transaction.  
+Profile Management: 
+For managing user profiles, a database will be maintained which would comprise of the details filled in the registration form. The database would also store the id and password of the user for login authentication.  
+The mapping of database with the objects will be done using JPA. We will set up Hibernate using spring context to save and retrieve data.   
+Selling a book: 
+A registered user can put up a book for sale at some desired price. The details of the book to be sold would include title, authors, ISBN, pictures, condition, description, and price. The user can also give away the book for free.  
+Post for book requirement: 
+Any user who wants to buy a book can post the requirement on the website. The user needs to post including details such as title, authors, ISBN, pictures, condition, description, and the price he is willing to pay for the book. 
+Search book: 
+The user can look for the book he wants using keywords such as the title, author, ISBN. The selected book will be stored temporarily in database for the user to review at a later stage.  
+We will be using spring validation annotations and tag libraries to display errors to the users in case of some incomplete or wrong information. 
+Buy, Sell or Bid: 
+The user can purchase the book he needs as per the listed price or he can even offer the seller to sell the book at some lower price. The seller can further accept the offer and give away the book at offered price or can decline the offer.  
+We will be providing security to our application using spring security xml and filter that is also a part of spring security xml. This will allow us to implement URL based security and restrict user according to their roles. 
+Feedback: 
+Lastly, once the transaction has been done, users will be prompted to fill up the feedback form for the buyer and seller both. They will be offered greater visibility and preference in searched results if the rating for them is high.  
+We can optionally ask users to rate our application too. 
+All these interfaces will be designed using spring MVC where users can make all the   decisions and perform actions on the data. We will be using message properties file to display custom messages to user along with cascading style sheets to improve look and feel of the application and to make our application attractive and interactive.
+					
+					</pre></div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
