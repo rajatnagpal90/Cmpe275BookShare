@@ -32,7 +32,7 @@ public class Seller {
    @Column(name = "seller_email")
    private String sellerEmail;
 	
- 
+  //This will create One to Many Mapping with Books Entity
    @OneToMany
 	private Collection<Book> book = new ArrayList<Book>();
    
